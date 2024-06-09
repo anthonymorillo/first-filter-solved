@@ -28,11 +28,11 @@ He preparado un informe de implementación con la descripción de todo el proces
 
 **Video demostrativo de un análisis fallido:**
 
-![Analisis Failded](./documentacion/sources/Sonarqube_analisis_fallido.mp4)
+https://github.com/anthonymorillo/first-filter-solved/blob/main/documentacion/sources/Sonarqube_analisis_fallido.mp4
 
 **B) - Análisis exitoso**
 
-**Video demostrativo de un análisis fallido:**
+https://github.com/anthonymorillo/first-filter-solved/blob/main/documentacion/sources/Sonarqube_analisis_exitoso.mp4
 
 ![Analisis Successfully](./documentacion/sources/Sonarqube_analisis_exitoso.mp4)
 
@@ -299,7 +299,7 @@ Estos son los reultados luego de correr el Pipeline con el código fuente ubicad
 
 - [x] **Que sea accesible desde internet.**
 
-![Aplicacion Funcionando](./documentacion/sources/Aplicacion_Funcionando.mp4)
+Aplicacion_Funcionando.mp4
 
 - [x] **Uso de metodologías DevOps.**
 
