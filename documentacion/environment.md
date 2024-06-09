@@ -219,4 +219,4 @@ spec:
               number: {{ .Values.vote.servicePort }}
 ```
 
-15. Todo esto fue lo necesario para la configuración general del proyecto, por lo que los resultados y demas puntos importantes se encuentran en el `README.md` ubicado en el *root* folder del proyecto.
+15. Estos fueron a grandes rasgos los pasos seguidos para el diseño y configuración de los recursos a desplegar en AKS, por lo que los resultados y demas puntos importantes se encuentran en el `README.md` ubicado en el *root folder* del proyecto.
