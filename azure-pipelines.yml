@@ -1,0 +1,160 @@
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  dockerRegistryServiceConnection: 'XXXXXXXXXXXXX-XXXXX-XXX-XXX-XXXXXXXXXXXXXXXXXXXXX'
+  resultimage: 'votingapp-result'
+  voteimage: 'votingapp-vote'
+  workerimage: 'votingapp-worker'
+  containerRegistry: 'acrregistrovotingapp.azurecr.io'
+  resultdockerfilePath: '**/result/Dockerfile'
+  votedockerfilePath: '**/vote/Dockerfile'
+  workerdockerfilePath: '**/worker/Dockerfile'
+  tag: 'latest'
+  azureSubscription: 'Azure subscription (XXXXXXXXXX-XXXX-XXXXX-XXXX-XXXXXXXX)'
+  connectionType: 'Azure Resource Manager'
+  resourceGroup: 'rg-example-voting-app'
+  kubernetesCluster: 'aks-example-voting-app'
+  environment: 'development'
+  releaseName: 'example-voting-app'
+
+stages:
+- stage: SonarScan
+  displayName: Paso 3 - Analisis SonarQube
+  jobs:
+  - job: CodeScan
+    displayName: Escaneando Codigo
+    pool:
+      name: Local-VMs
+    steps:
+    - task: SonarQubePrepare@6
+      inputs:
+        SonarQube: 'SonarQube-SC'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'sqa_93df8ffd9bc7123cdee74fb40dd06fee55f89937'
+        cliProjectName: 'example-voting-app'
+        cliSources: '.'
+    - task: SonarQubeAnalyze@6
+      inputs:
+        jdkversion: 'JAVA_HOME'
+    - task: SonarQubePublish@6
+      inputs:
+        pollingTimeoutSec: '300'
+
+- stage: Build
+  displayName: Paso 4 - Generacion y publicacion de imagen Docker
+  jobs:
+  - job: ResultBuild # Job encargado de generar y subir la imagen del web app Result
+    displayName: Generando la imgen de Result App
+    pool:
+      name: Local-VMs
+    steps:
+    - task: Docker@2
+      displayName: Generar y subida de la imagen de result
+      inputs:
+        command: buildAndPush
+        repository: $(resultimage)
+        dockerfile: $(resultdockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+  - job: VoteBuild # Job encargado de generar y subir la imagen del web app Vote
+    displayName: Generando la imgen de Vote App 
+    pool:
+      name: Local-VMs
+    steps:
+    - task: Docker@2
+      displayName: Generar y subida de la imagen de vote
+      inputs:
+        command: buildAndPush
+        repository: $(voteimage)
+        dockerfile: $(votedockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+  - job: WorkerBuild # Job encargado de generar y subir la imagen del web app Worker
+    displayName: Generando la imgen de Worker App
+    pool:
+      name: Local-VMs
+    steps:
+    - task: Docker@2
+      displayName: Generar y subida de la imagen de worker
+      inputs:
+        command: buildAndPush
+        repository: $(workerimage)
+        dockerfile: $(workerdockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+    - upload: environment
+      artifact: environment
+
+- stage: PowershellScripting
+  displayName: Paso 5 - Powershell Scripting
+  dependsOn: [] # Condicion necesaria para correr este stage se ejecute de forma paralela
+  jobs:
+  - job: HolaMundox10
+    displayName: Imprimir 10 Hola Mundo (Parte A)
+    dependsOn: [] # Condicion necesaria para correr este stage como job paralelo
+    pool:
+      name: Local-VMs
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          for ($i = 1; $i -le 10; $i++) {
+              Write-Output "Hello World" # Imprimir al usuario Hello World por i cantidad de veces
+          }
+          Start-Sleep -Seconds 3  # Pausa de 3 segundos para visualizar los resultados
+  - job: Fechax10
+    displayName: 10 archivos con la fecha (Parte B)
+    pool:
+      name: Local-VMs
+    steps:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          $currentDate = Get-Date -Format "dd-MM-yyyy" # Obtiene la fecha en el formato definido
+          for ($i = 1; $i -le 10; $i++) {
+            $fileName = "file_$currentDate_$i.txt"     # Definir el nombre del archivo
+            
+            $currentDate | Out-File -FilePath $fileName    # Crear el archivo y escribir la fecha dentro de estos
+            
+            Write-Host -NoNewline "Se ha creado el archivo $fileName, dentro se encuentra: "  # Imprimir el nombre y contenido del archivo
+            Get-Content -Path $fileName             
+
+            Start-Sleep -Milliseconds 300      # Pausar cada impresion 300 milisegundos para visualizar los resultados
+          }
+          Start-Sleep -Seconds 3  # Pausa de 3 segundos para visualizar todas las impresiones
+
+- stage: Deploy
+  displayName: Paso 6 - Despliegue de app a AKS
+  dependsOn: Build
+  jobs:
+  - deployment: Deploy
+    displayName: Despliuege de la App usando Helm
+    pool:
+      name: Local-VMs
+    environment: 'PruebaTecnicaCGLBHD'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: HelmDeploy@0
+              inputs:
+                connectionType: $(connectionType)
+                azureSubscription: $(azureSubscription)
+                azureResourceGroup: $(resourceGroup)
+                kubernetesCluster: $(kubernetesCluster)
+                namespace: $(environment)
+                command: 'upgrade'
+                chartType: 'FilePath'
+                chartPath: '$(Pipeline.Workspace)/environment/$(releaseName)'
+                releaseName: $(releaseName)
+                waitForExecution: false

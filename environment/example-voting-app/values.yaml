@@ -1,0 +1,89 @@
+# Valores por defecto para example-voting-app.
+
+replicaCount: 1
+environment: development
+
+db:
+  appName: db
+  # Variables para el Deployment
+  nameDeployment: db
+  repository: postgres
+  tag: 15-alpine
+  containerName: postgres
+  containerPort: 5432
+  containerPortName: postgres
+  mountPath: /var/lib/postgresql/data
+  volumeName: db-data
+  # Variables para el Service
+  serviceName: db
+  serviceType: ClusterIP
+  servicePortName: db
+  servicePort: 5432
+  targetServicePort: 5432
+
+redis:
+  appName: redis
+  # Variables para el Deployment
+  nameDeployment: redis
+  repository: redis
+  tag: alpine
+  containerName: redis
+  containerPort: 6379
+  containerPortName: redis
+  mountPath: /data
+  volumeName: redis-data
+  # Variables para el Service
+  serviceName: redis
+  serviceType: ClusterIP
+  servicePortName: redis
+  servicePort: 6379
+  targetServicePort: 6379
+
+result:
+  appName: result
+  # Variables para el Deployment
+  nameDeployment: result
+  repository: acrregistrovotingapp.azurecr.io/votingapp-result
+  tag: latest
+  containerName: result
+  containerPort: 80
+  containerPortName: result
+  # Variables para el Service
+  serviceName: result
+  serviceType: NodePort
+  servicePortName: result
+  servicePort: 5001
+  targetServicePort: 80
+  nodePort: 31001
+
+vote:
+  appName: vote
+  # Variables para el Deployment
+  nameDeployment: vote
+  repository: acrregistrovotingapp.azurecr.io/votingapp-vote
+  tag: latest
+  containerName: vote
+  containerPort: 80
+  containerPortName: vote
+  # Variables para el Service
+  serviceName: vote
+  serviceType: NodePort
+  servicePortName: vote
+  servicePort: 5000
+  targetServicePort: 80
+  nodePort: 31000
+
+worker:
+  appName: worker
+  # Variables para el Deployment
+  nameDeployment: worker
+  repository: acrregistrovotingapp.azurecr.io/votingapp-worker
+  tag: latest
+  containerName: worker
+
+appingress:
+  ingressName: nginx-ingress
+  ingressClassName: nginx
+  pathType: Prefix
+  votePath: /vote
+  resultPath: /

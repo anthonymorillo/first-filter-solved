@@ -1,0 +1,143 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.db.appName }}
+  name: {{ .Values.db.nameDeployment }}
+  namespace: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.db.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.appName }}
+    spec:
+      containers:
+      - image: {{ .Values.db.repository }}:{{ .Values.db.tag }}
+        name: {{ .Values.db.containerName }}
+        env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: trust
+        ports:
+        - containerPort: {{ .Values.db.containerPort }}
+          name: {{ .Values.db.containerPortName }}
+        volumeMounts:
+        - mountPath: {{ .Values.db.mountPath }}
+          name: {{ .Values.db.volumeName }}
+      volumes:
+      - name: {{ .Values.db.volumeName }}
+        emptyDir: {} 
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.redis.appName }}
+  name: {{ .Values.redis.nameDeployment }}
+  namespace: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.redis.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.redis.appName }}
+    spec:
+      containers:
+      - image: {{ .Values.redis.repository }}:{{ .Values.redis.tag }}
+        name: {{ .Values.redis.containerName }}
+        ports:
+        - containerPort: {{ .Values.redis.containerPort }}
+          name: {{ .Values.redis.containerPortName }}
+        volumeMounts:
+        - mountPath: {{ .Values.redis.mountPath }}
+          name: {{ .Values.redis.volumeName }}
+      volumes:
+      - name: {{ .Values.redis.volumeName }}
+        emptyDir: {} 
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.result.appName }}
+  name: {{ .Values.result.nameDeployment }}
+  namespace: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.result.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.result.appName }}
+    spec:
+      containers:
+      - image: {{ .Values.result.repository }}:{{ .Values.result.tag }}
+        name: {{ .Values.result.containerName }}
+        ports:
+        - containerPort: {{ .Values.result.containerPort }}
+          name: {{ .Values.result.containerPortName }}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.vote.appName }}
+  name: {{ .Values.vote.nameDeployment }}
+  namespace: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.vote.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.vote.appName }}
+    spec:
+      containers:
+      - image: {{ .Values.vote.repository }}:{{ .Values.vote.tag }}
+        name: {{ .Values.vote.containerName }}
+        ports:
+        - containerPort: {{ .Values.vote.containerPort }}
+          name: {{ .Values.vote.containerPortName }}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.worker.appName }}
+  name: {{ .Values.worker.nameDeployment }}
+  namespace: {{ .Values.environment }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.worker.appName }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.worker.appName }}
+    spec:
+      containers:
+      - image: {{ .Values.worker.repository }}:{{ .Values.worker.tag }}
+        name: {{ .Values.worker.containerName }}

@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.db.appName }}
+  name: {{ .Values.db.serviceName }}
+  namespace: {{ .Values.environment }}
+spec:
+  type: {{ .Values.db.serviceType }}
+  ports:
+  - name: {{ .Values.db.servicePortName }}
+    port: {{ .Values.db.servicePort }}
+    targetPort: {{ .Values.db.targetServicePort }}
+  selector:
+    app: {{ .Values.db.appName }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.redis.appName }}
+  name: {{ .Values.redis.serviceName }}
+  namespace: {{ .Values.environment }}
+spec:
+  type: {{ .Values.redis.serviceType }}
+  ports:
+  - name: {{ .Values.redis.servicePortName }}
+    port: {{ .Values.redis.servicePort }}
+    targetPort: {{ .Values.redis.targetServicePort }}
+  selector:
+    app: {{ .Values.redis.appName }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.result.appName }}
+  name: {{ .Values.result.serviceName }}
+  namespace: {{ .Values.environment }}
+spec:
+  type: {{ .Values.result.serviceType }}
+  ports:
+  - name: {{ .Values.result.servicePortName }}
+    port: {{ .Values.result.servicePort }}
+    targetPort: {{ .Values.result.targetServicePort }}
+    nodePort: {{ .Values.result.nodePort }}
+  selector:
+    app: {{ .Values.result.appName }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.vote.appName }}
+  name: {{ .Values.vote.serviceName }}
+  namespace: {{ .Values.environment }}
+spec:
+  type: {{ .Values.vote.serviceType }}
+  ports:
+  - name: {{ .Values.vote.servicePortName }}
+    port: {{ .Values.vote.servicePort }}
+    targetPort: {{ .Values.vote.targetServicePort }}
+    nodePort: {{ .Values.vote.nodePort }}
+  selector:
+    app: {{ .Values.vote.appName }}
