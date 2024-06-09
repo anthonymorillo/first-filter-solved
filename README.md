@@ -28,13 +28,13 @@ He preparado un informe de implementación con la descripción de todo el proces
 
 **Video demostrativo de un análisis fallido:**
 
-# (INSERTAR VIDEO, borra esto cuando metas el video)
+![Analisis Failded](./documentacion/sources/Sonarqube_analisis_fallido.mp4)
 
 **B) - Análisis exitoso**
 
 **Video demostrativo de un análisis fallido:**
 
-# (INSERTAR VIDEO, borra esto cuando metas el video)
+![Analisis Successfully](./documentacion/sources/Sonarqube_analisis_exitoso.mp4)
 
 ### 5. Genera una imagen de docker y sube la imagen a dockerhub/ACR/ECR desde el pipeline yaml.
 
@@ -299,9 +299,7 @@ Estos son los reultados luego de correr el Pipeline con el código fuente ubicad
 
 - [x] **Que sea accesible desde internet.**
 
-**Video demostrativo del acceso a la aplicación desde un celular:**
-
-# (INSERTAR VIDEO, borra esto cuando metas el video)
+![Aplicacion Funcionando](./documentacion/sources/Aplicacion_Funcionando.mp4)
 
 - [x] **Uso de metodologías DevOps.**
 
