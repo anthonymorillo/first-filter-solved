@@ -35,7 +35,7 @@ stages:
         SonarQube: 'SonarQube-SC'
         scannerMode: 'CLI'
         configMode: 'manual'
-        cliProjectKey: 'sqa_93df8ffd9bc7123cdee74fb40dd06fee55f89937'
+        cliProjectKey: 'sqa_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
         cliProjectName: 'example-voting-app'
         cliSources: '.'
     - task: SonarQubeAnalyze@6

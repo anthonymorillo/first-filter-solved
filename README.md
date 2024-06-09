@@ -1,6 +1,6 @@
 # Prueba-Dummy
 
-## Documentación
+## Documentación generada
 
 * Implementación de Terraform: [Terraform](./documentacion/terraform.md)
 * Instalación y configuración de Sonarqube: [Sonarqube](./documentacion/sonarqube.md)
@@ -104,7 +104,6 @@ tag: 'latest'
           $(tag)
     - upload: environment
       artifact: environment
-
 ```
 Tal como se puede observar, el Pipeline se encarga de generar tres imagenes (`vote`,`worker` y `result`), pues el proyecto contiene 3 aplicaciones que dependen de una imagen definidas por un `Dockerfile`, cada uno se encuentra en una capeta de su respectiva aplicación, es por esto que varias de las variables declaradas son `<NombreWebApp>dockerfilePath` pues describen la ubicacion de cada uno de los `Dockerfile` y de esta forma el Pipeline puede encontrarlo y generar la imagen deseada.
 
@@ -328,9 +327,9 @@ https://github.com/anthonymorillo/first-filter-solved/assets/110003126/a9a04217-
 
 - [x] Codigo
 
-- [x] yaml de k8s (Ubicación: [environment](./environment/)
+- [x] yaml de k8s (Ubicación: [environment](./environment/))
 
-- [x] Pipelines (Ubicación: [pipeline](./azure-pipelines.yml)
+- [x] Pipelines (Ubicación: [pipeline](./azure-pipelines.yml))
 
 - [x] Logs
 
