@@ -294,7 +294,7 @@ En la carpeta `environment` se encuentra el *chart* de Helm creado para este pro
 Estos son los reultados luego de correr el Pipeline con el código fuente ubicado en este proyecto:
 
   <p align="center">
-    <img alt="Pagina de votación" width="460" height="300" src="./documentacion/sources/Pipeline_Resultados.jpg">
+    <img alt="Pagina de votación" width="200" height="300" src="./documentacion/sources/Pipeline_Resultados.jpg">
   </p>
 
 ## Que se espera del ejercicio
