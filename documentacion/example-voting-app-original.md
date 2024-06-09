@@ -50,11 +50,11 @@ kubectl delete -f k8s-specifications/
 
 ![Architecture diagram](./sources/architecture.excalidraw.png)
 
-* Una aplicación web front-end en [Python](/example-voting-app/vote/) que te permite votar entre dos opciones.
+* Una aplicación web front-end en [Python](../vote/) que te permite votar entre dos opciones.
 * Un [Redis](https://hub.docker.com/_/redis/) que recoge nuevos votos.
-* Un [.NET](/example-voting-app/worker/) trabajador que consume votos y los almacena en...
+* Un [.NET](../worker/) trabajador que consume votos y los almacena en...
 * Un [Postgres](https://hub.docker.com/_/postgres/) base de datos alojada en un volumen Docker.
-* Una aplicación [Node.js](/example-voting-app/result/) que muestra los resultados de la votación en tiempo real.
+* Una aplicación [Node.js](../result/) que muestra los resultados de la votación en tiempo real.
 
 ## Notes
 

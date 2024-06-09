@@ -1,7 +1,7 @@
 # Infraestructura como codigo
 
 ## Introducción
-Todos los recursos utilizados en este proyecto fueron desplegados con *Infraestructura como Código (IaC)*, específicamente con la herramienta llamada **Terraform**. Todos los archivos utilizados para la ejecución del mismo se encuentran en la carpeta [terraform](/example-voting-app/terraform/).
+Todos los recursos utilizados en este proyecto fueron desplegados con *Infraestructura como Código (IaC)*, específicamente con la herramienta llamada **Terraform**. Todos los archivos utilizados para la ejecución del mismo se encuentran en la carpeta [terraform](../terraform/).
 
 
 ## Estructura de la carpeta

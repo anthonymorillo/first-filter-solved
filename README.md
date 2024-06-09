@@ -10,7 +10,7 @@
 
 ### 1. Descarga los archivos del repositorio elegido.
 
-El repostorio elegido fue [example-voting-app](https://github.com/dockersamples/example-voting-app). La descripción original de dicho proyecto se encuentra traducido al español en la carpeta `/documentacion`: [example-voting-app-original](./documentacion/example-voting-app.md).
+El repostorio elegido fue [example-voting-app](https://github.com/dockersamples/example-voting-app). La descripción original de dicho proyecto se encuentra traducido al español en la carpeta `/documentacion`: [example-voting-app-original](./documentacion/example-voting-app-original.md).
 
 ### 2. Instala el framework necesario en caso de no tenerlo.
 
@@ -309,9 +309,9 @@ Estos son los reultados luego de correr el Pipeline con el código fuente ubicad
 
 ## Bonus para tomar en consideración
 
-- [x] **Construye un clúster de kubernetes usando IaC (terraform o eksctl)**: *(Archivos de configuración de **Terraform** se encuentran en [terraform](/example-voting-app/terraform/))*
+- [x] **Construye un clúster de kubernetes usando IaC (terraform o eksctl)**: *(Archivos de configuración de **Terraform** se encuentran en [terraform](./terraform/))*
 
-- [x] **Usa un manejador de templates como Kustomize o Helm.** *(Para el desarrollo de esta prueba fue utilizado **Helm**, los archivos necesarios se encuentran en [environment/example-voting-app](/example-voting-app/environment/example-voting-app/))*
+- [x] **Usa un manejador de templates como Kustomize o Helm.** *(Para el desarrollo de esta prueba fue utilizado **Helm**, los archivos necesarios se encuentran en [environment/example-voting-app](./environment/example-voting-app/))*
 
 - [x] **Despliega en nube publica (AWS o Azure).** *(Todo el proyecto fue desplegado en **Azure**)*
 
@@ -328,9 +328,9 @@ https://github.com/anthonymorillo/first-filter-solved/assets/110003126/a9a04217-
 
 - [x] Codigo
 
-- [x] yaml de k8s (Ubicación: [environment](/example-voting-app/environment/))
+- [x] yaml de k8s (Ubicación: [environment](./environment/)
 
-- [x] Pipelines (Ubicación: [pipeline](/example-voting-app/azure-pipelines.yml))
+- [x] Pipelines (Ubicación: [pipeline](./azure-pipelines.yml)
 
 - [x] Logs
 
