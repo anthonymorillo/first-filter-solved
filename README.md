@@ -28,13 +28,21 @@ He preparado un informe de implementación con la descripción de todo el proces
 
 **Video demostrativo de un análisis fallido:**
 
+<center>
+
 https://github.com/anthonymorillo/first-filter-solved/assets/110003126/fba124e1-eb64-450c-baee-2e7be5bc1d61
+
+</center>
 
 **B) - Análisis exitoso**
 
 **Video demostrativo de un análisis exitoso:**
 
+<center>
+
 https://github.com/anthonymorillo/first-filter-solved/assets/110003126/51309e84-4e0a-4ccc-9147-848018883bdc
+
+</center>
 
 ### 5. Genera una imagen de docker y sube la imagen a dockerhub/ACR/ECR desde el pipeline yaml.
 
@@ -110,7 +118,11 @@ Una vez generada la imagen, esta será subida a un registro de contenedores, es 
 
 Finalmente con las variables `<NombreWebApp>image` y `tag` se definen el respositorio y el tag respectivamente a los cuales serán subidas las imagenes dentro del registro, este proceso se repite tres veces, una por cada aplicación, y los resultados obtenidos fueron los siguientes:
 
+<center>
+
 ![Docker Respositories](./documentacion/sources/acr_repostories.jpg)
+
+</center>
 
 ### 6. Dentro del pipeline ejecute lo siguiente en bash o powershell. 
 
@@ -120,7 +132,11 @@ Dado que este paso no esta relacionado con la aplicación, las tareas de parte s
 
 Para lograr esto, se colocó la condición `dependsOn: []` justo debajo del stage `- stage: PowershellScripting`, la cual quiere decir que esta no depende de ninguna de las demas etapas o stages del pipeline, logrando asi que se ejecute en paralelo con las demas, tal como se puede observar a continuación:
 
+<center>
+
 ![Pipeline Workflow](./documentacion/sources/AzurePipeline_JobParalelo.jpg)
+
+</center>
 
 **A) Imprime Hola Mundo 10 veces en pantalla con un job paralelo**
 
@@ -139,7 +155,11 @@ Para lograr esto, se colocó la condición `dependsOn: []` justo debajo del stag
   ```
   **Resulado obtenido:**
 
+  <center>
+
   ![Resultado Primer Script](./documentacion/sources/AzurePipeline_Resultado_10Holamundo.jpg)
+
+  </center>
 
 **B) Script que cree 10 archivos con la fecha y luego lo imprima en consola**
 
@@ -166,7 +186,11 @@ Para lograr esto, se colocó la condición `dependsOn: []` justo debajo del stag
 
    **Resulado obtenido:**
 
+  <center>
+
   ![Resultado Segundo Script](./documentacion/sources/AzurePipeline_Resultado_10Fecha.jpg)
+
+  </center>
 
 ### 7. Despliega la app a un clúster de kubernetes (minikube o EKS o AKS)
 
@@ -250,15 +274,25 @@ spec:
 
 Tal como se puede observar, esta plantilla de **ingress.yaml** el Ingress de la aplicación toma de base el NGINX Controller previamente configurado y contiene dos propioedades `- path`, el primero es la ruta predeterminada '/' y esta lleva a la página de *Resultados*, por lo que con el simple hecho de ingresar el dominio web adquirido **http://cluster-demostracion.live**, este lo lleva a la pagina que se muestra a continuación:
 
+<center>
+
 ![Pagina de Resultados](./documentacion/sources/Pagina_Resultados.jpg)
+
+</center>
 
 La segunda propiedad `-path` es la ruta `/vote` y esta lleva a la pagina **Votos**, por lo que al colocar el URL **http://cluster-demostracion.live/vote**, este lleva a la pagina en la cual se puede realizar la votación, tal como se muestra a continuación:
 
+<center>
+
 ![Pagina de votación](./documentacion/sources/Pagina_votacion.jpg)
+
+</center>
 
 ### 9. Sube al repo en una carpeta environment todos los yaml de k8s
 
 En la carpeta `environment` se encuentra el *chart* de Helm creado para este proyecto llamado **example-voting-app**, por lo que allí se encuentran todos los archivos necesarios para desplegar este proyecto, tal como se muestra a continuación:
+
+<center>
 
 ```
 📦environment
@@ -273,11 +307,17 @@ En la carpeta `environment` se encuentra el *chart* de Helm creado para este pro
    ┣ 📜Chart.yaml
    ┗ 📜values.yaml
 ```
+</center>
+
 ### Resultados del Pipeline:
 
 Estos son los reultados luego de correr el Pipeline con el código fuente ubicado en este proyecto:
 
+<center>
+
 ![Pagina de votación](./documentacion/sources/Pipeline_Resultados.jpg)
+
+</center>
 
 ## Que se espera del ejercicio
 
@@ -295,13 +335,16 @@ Estos son los reultados luego de correr el Pipeline con el código fuente ubicad
 
 - [x] **Usa un manejador de templates como Kustomize o Helm.** *(Para el desarrollo de esta prueba fue utilizado **Helm**, los archivos necesarios se encuentran en [environment/example-voting-app](/example-voting-app/environment/example-voting-app/))*
 
-- [x] **Despliega en nube publica (AWS o Azure).** *(Todo el proyecto fue desplegado en **Azure**)*
+- [] **Despliega en nube publica (AWS o Azure).** *(Todo el proyecto fue desplegado en **Azure**)*
 
 - [x] **Que sea accesible desde internet.**
 
 **Video demostrativo del acceso a la aplicación desde un celular:**
+<center>
 
 https://github.com/anthonymorillo/first-filter-solved/assets/110003126/a9a04217-d3c3-480e-9404-6959c6e6b6e2
+
+</center>
 
 - [x] **Uso de metodologías DevOps.**
 
